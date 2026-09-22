@@ -22,13 +22,13 @@ from app.email_draft import build_email, save_draft
 from app.extract import ExtractionResult, extract
 from app.llm import LLMError, LLMProvider, get_llm
 from app.schema import MeetingExtraction
-from app.validate import Flag, has_errors, validate
+from app.validate import Flag, flag_key, has_errors, validate
 
 log = logging.getLogger("pipeline")
 
 
 class ApprovalBlocked(Exception):
-    """Approval refused: validation errors present and no override reason given."""
+    """Approval refused: validation errors or unconfirmed warnings present."""
 
 
 class Pipeline:
@@ -96,20 +96,29 @@ class Pipeline:
         return validate(data, transcript)
 
     def approve(self, meeting_id: int, approved: MeetingExtraction, reviewer: str,
-                override_reason: str | None = None, confirm_new_client: bool = False) -> list[Flag]:
-        """Store the reviewer-edited version. Blocked while errors exist unless overridden."""
+                confirm_new_client: bool = False,
+                acknowledged_warnings: set[str] | None = None) -> list[Flag]:
+        """Store the reviewer-edited version. Blocked while errors exist and while any
+        warning is not confirmed (acknowledged_warnings holds flag_key()s)."""
         if not reviewer.strip():
             raise ApprovalBlocked("Manjka ime pregledovalca.")
         flags = self.revalidate(meeting_id, approved)
-        override_reason = (override_reason or "").strip() or None
-        if has_errors(flags) and not override_reason:
-            raise ApprovalBlocked("Podatki vsebujejo napake. Popravite jih ali označite "
-                                  "'override' in navedite razlog.")
-        note = f"odobril {reviewer}" + (f"; override: {override_reason}" if override_reason else "")
+        if has_errors(flags):
+            raise ApprovalBlocked("Podatki vsebujejo napake. Popravite jih ali izbrišite postavko.")
+        acknowledged_warnings = acknowledged_warnings or set()
+        warnings = [f for f in flags if f.severity == "warning"]
+        unconfirmed = [f for f in warnings if flag_key(f) not in acknowledged_warnings]
+        if unconfirmed:
+            raise ApprovalBlocked("Nepotrjena opozorila: "
+                                  + "; ".join(f"{f.field}: {f.message}" for f in unconfirmed))
+        note = f"odobril {reviewer}"
+        if warnings:
+            note += f"; potrjena opozorila: {len(warnings)}"
         db.transition(self.conn, meeting_id, db.APPROVED, note,
                       approved_json=approved.model_dump(mode="json"),
-                      flags_json=[f.model_dump() for f in flags],
-                      reviewer=reviewer, override_reason=override_reason,
+                      flags_json=[{**f.model_dump(), "confirmed": f.severity == "warning"}
+                                  for f in flags],
+                      reviewer=reviewer,
                       confirm_new_client=int(confirm_new_client))
         return flags
 

@@ -13,7 +13,7 @@ from app import config
 from app.config import employees_by_id, load_employees
 from app.pipeline import ApprovalBlocked, Pipeline
 from app.schema import KeyFact, MeetingExtraction, NextStep, Participant, Requirement
-from app.validate import has_errors
+from app.validate import flag_key, has_errors
 
 st.set_page_config(page_title="Pregled sestankov", layout="wide")
 
@@ -139,8 +139,7 @@ with right:
                                   "key_facts": [], "next_steps": []}
 
     if not editable:
-        st.info(f"Odobril: **{m['reviewer']}**" + (f" · override: _{m['override_reason']}_"
-                                                    if m["override_reason"] else ""))
+        st.info(f"Odobril: **{m['reviewer']}**")
 
     # --- header fields ---
     st.subheader("Osnovni podatki")
@@ -267,6 +266,11 @@ with right:
 
     # --- flags: live re-validation of the edited data, shown next to each item ---
     flags = p.revalidate(m["id"], edited)
+    # Confirmed warnings, keyed by displayed item + message: survives deleting other items,
+    # and editing the item (which changes the message) asks for confirmation again.
+    confirmed: set[str] = st.session_state.setdefault(k + "confirmed", set())
+    acknowledged: set[str] = set()  # the same warnings, keyed as the pipeline sees them
+    pending: list[str] = []
     for f in flags:
         match = re.match(r"(\w+)\[(\d+)\]", f.field)
         if match:  # index in the edited list -> index of the original (displayed) item
@@ -277,29 +281,44 @@ with right:
         box = slots.get(path, st)
         if f.severity == "error":
             box.error(f"🟥 {f.message}")
-        else:
-            box.warning(f"🟨 {f.message}")
+            continue
+        ui_key = f"{path}|{f.message}"
+        if ui_key in confirmed or not editable:  # approved meetings had all warnings confirmed
+            acknowledged.add(flag_key(f))
+            box.success(f"✔ Potrjeno: {f.message}")
+            continue
+        pending.append(ui_key)
+        c1, c2 = box.columns([5, 1], vertical_alignment="center")
+        c1.warning(f"🟨 {f.message}")
+        if c2.button("✔ Potrdi", key=f"{k}confirm|{ui_key}", help="Pregledal sem, je v redu"):
+            confirmed.add(ui_key)
+            st.rerun()
     n_err = sum(f.severity == "error" for f in flags)
-    st.markdown(f"**Validacija:** {n_err} napak, {len(flags) - n_err} opozoril")
+    st.markdown(f"**Validacija:** {n_err} napak, {len(flags) - n_err} opozoril "
+                f"({len(flags) - n_err - len(pending)} potrjenih)")
 
     # --- actions ---
     st.divider()
     if editable:
         errors_present = has_errors(flags)
-        override = st.checkbox("Override: odobri kljub napakam", key=k + "ovr", disabled=not errors_present)
-        reason = st.text_input("Razlog za override", key=k + "reason", disabled=not override)
         confirm_client = st.checkbox("Potrjujem ustvarjanje nove stranke, če je ni v sistemu",
                                      key=k + "newclient")
-        blocked = errors_present and not (override and reason.strip())
-        if st.button("✅ Odobri", type="primary", disabled=blocked):
+        blocked_by_errors = errors_present
+        if pending and st.button(f"✔ Potrdi vsa opozorila ({len(pending)})", key=k + "confirm_all"):
+            confirmed.update(pending)
+            st.rerun()
+        if st.button("✅ Odobri", type="primary", disabled=blocked_by_errors or bool(pending)):
             try:
-                p.approve(m["id"], edited, reviewer, reason if override else None, confirm_client)
+                p.approve(m["id"], edited, reviewer, confirm_new_client=confirm_client,
+                          acknowledged_warnings=acknowledged)
                 st.session_state["flash"] = ("success", "Odobreno.")
                 st.rerun()
             except (ApprovalBlocked, ValidationError) as e:
                 st.error(str(e))
-        if blocked:
-            st.caption("Odobritev je blokirana, dokler obstajajo napake (popravi ali uporabi override z razlogom).")
+        if blocked_by_errors:
+            st.caption("Odobritev je blokirana, dokler obstajajo napake (popravi podatke ali izbriši postavko).")
+        elif pending:
+            st.caption("Pred odobritvijo potrdi vsa opozorila (✔ Potrdi) ali popravi podatke.")
 
     if m["status"] in (db.APPROVED, db.SYNC_FAILED, db.SYNCED):
         create_client = False

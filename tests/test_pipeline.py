@@ -71,15 +71,6 @@ def test_hallucinated_budget_blocks_approval(tmp_path):
     assert db.get(p.conn, mid)["status"] == db.APPROVED
 
 
-def test_override_allows_approval_with_reason(tmp_path):
-    p = make_pipeline(tmp_path, FakeLLM([load_fixture("no_price_hallucinated")]))
-    mid, _ = p.ingest(TRANSCRIPTS / "no_price.txt")
-    data = MeetingExtraction.model_validate(db.get(p.conn, mid)["extraction_json"])
-    p.approve(mid, data, "Tester", override_reason="Znesek potrjen po telefonu")
-    m = db.get(p.conn, mid)
-    assert m["status"] == db.APPROVED and m["override_reason"] == "Znesek potrjen po telefonu"
-
-
 def test_schema_failure_retries_once_with_errors(tmp_path):
     bad = {"summary": "manjka vse ostalo"}
     llm = FakeLLM([bad, load_fixture("normal")])
@@ -167,3 +158,23 @@ def test_missing_llm_credentials_marks_extraction_failed(tmp_path):
     mid, _ = p.ingest(TRANSCRIPTS / "normal.txt")
     m = db.get(p.conn, mid)
     assert m["status"] == db.EXTRACTION_FAILED and "credentials" in m["last_error"]
+
+
+def test_warnings_must_be_confirmed_before_approval(tmp_path):
+    from app.validate import flag_key
+    p = make_pipeline(tmp_path, FakeLLM.from_fixtures(FIXTURES))
+    mid, _ = p.ingest(TRANSCRIPTS / "ambiguous.txt")  # approximate budget + suggested owner
+    data = MeetingExtraction.model_validate(db.get(p.conn, mid)["extraction_json"])
+    warnings = [f for f in p.revalidate(mid, data) if f.severity == "warning"]
+    assert len(warnings) == 2
+
+    with pytest.raises(ApprovalBlocked, match="Nepotrjena opozorila"):
+        p.approve(mid, data, "Tester")
+    with pytest.raises(ApprovalBlocked):  # confirming only one is not enough
+        p.approve(mid, data, "Tester", acknowledged_warnings={flag_key(warnings[0])})
+
+    p.approve(mid, data, "Tester", acknowledged_warnings={flag_key(f) for f in warnings})
+    m = db.get(p.conn, mid)
+    assert m["status"] == db.APPROVED
+    assert all(f["confirmed"] for f in m["flags_json"] if f["severity"] == "warning")
+    assert "potrjena opozorila: 2" in db.audit_log(p.conn, mid)[-1]["note"]

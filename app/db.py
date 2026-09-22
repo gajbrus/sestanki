@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS meetings (
     flags_json       TEXT,
     approved_json    TEXT,
     reviewer         TEXT,
-    override_reason  TEXT,
     confirm_new_client INTEGER NOT NULL DEFAULT 0,
     crm_result_json  TEXT,
     email_draft      TEXT,

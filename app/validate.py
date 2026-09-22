@@ -1,7 +1,7 @@
 """Deterministic post-extraction checks (no LLM).
 
-Every check produces a Flag. Errors block approval until the reviewer edits the
-data or explicitly overrides; warnings are shown but do not block.
+Every check produces a Flag. Errors block approval until the reviewer fixes the
+data or deletes the item; warnings must be confirmed by the reviewer.
 """
 from __future__ import annotations
 
@@ -177,6 +177,11 @@ def validate(extraction: MeetingExtraction, transcript: str,
             err(f + ".due_date", f"Rok {s.due_date} je pred datumom sestanka {extraction.meeting_date}.")
 
     return flags
+
+
+def flag_key(flag: Flag) -> str:
+    """Identity of a flag, used to record which warnings the reviewer confirmed."""
+    return f"{flag.field}|{flag.message}"
 
 
 def has_errors(flags: list[Flag]) -> bool:

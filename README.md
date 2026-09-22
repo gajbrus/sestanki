@@ -35,7 +35,7 @@ stateDiagram-v2
     received --> extraction_failed: API error / schema invalid twice
     extraction_failed --> extracted: retry-failed
     extracted --> needs_review: validate (always)
-    needs_review --> approved: reviewer (errors fixed or override + reason)
+    needs_review --> approved: reviewer (errors fixed, warnings confirmed)
     approved --> synced: CRM push OK
     approved --> sync_failed: 5xx / timeout after 4 attempts, 4xx, unknown client
     sync_failed --> synced: retry-failed / sync
@@ -88,7 +88,7 @@ python -m app.pipeline status
 # 3. review UI (logged in as REVIEWER_EMPLOYEE_ID from .env): pick a meeting, edit / add / delete items, approve
 streamlit run review_ui.py
 #    - ambiguous.txt: approximate budget + suggested owner -> yellow warnings
-#    - try editing an evidence quote into something invented -> red error, Approve disabled
+#    - try editing an evidence quote into something invented -> red error, Approve disabled until fixed or deleted
 
 # 4. sync an approved meeting (or use the button in the UI)
 python -m app.pipeline sync 1
@@ -158,7 +158,7 @@ Output format is enforced by the provider, not by the prompt. On Anthropic this 
 - **Okvirni zneski** (`certainty="approximate"`) vedno dobijo opozorilo za človeško potrditev; model jih ne sme zaokroževati.
 - **Zaposleni.** `employee_id` mora obstajati v `employees.json`; udeleženec, označen kot zaposleni, se mora ujemati z imenom/vzdevkom. Nosilec naloge, ki se ni izrecno zavezal, je označen kot predlog (opozorilo).
 - **Datumi.** Rok pred datumom sestanka → napaka.
-- **Človek v zanki.** Nič se ne odobri samodejno. Napake blokirajo odobritev, dokler jih pregledovalec ne popravi ali izrecno preglasi (override) z razlogom, ki se shrani v revizijsko sled. UI ob vsakem popravku znova validira. Pregledovalec lahko doda postavke, ki jih je model spregledal (➕), vendar zanje velja isto pravilo: potreben je citat iz transkripta.
+- **Človek v zanki.** Nič se ne odobri samodejno. Napake blokirajo odobritev, dokler jih pregledovalec ne popravi ali postavke ne izbriše. Opozorila (npr. okviren proračun, predlagan nosilec) mora pregledovalec potrditi z gumbom ✔ Potrdi (ali „Potrdi vsa opozorila“), preden lahko odobri; potrditev se shrani ob zastavicah in v revizijsko sled. Če postavko po potrditvi spremeni, jo mora potrditi znova. UI ob vsakem popravku znova validira. Pregledovalec lahko doda postavke, ki jih je model spregledal (➕), vendar zanje velja isto pravilo: potreben je citat iz transkripta.
 - **Samo odobreni podatki gredo naprej.** V sistem in v e-pošto gre izključno `approved_json`, nikoli surov izhod modela. Kontakti v e-pošti so vedno iz `employees.json`; LLM lahko kvečjemu olepša uvodni in zaključni stavek (`LLM_POLISH_EMAIL`).
 - **Prompt injection.** Transkript je označen kot podatek v `<transcript>` oznakah, prompt ukazuje ignoriranje navodil v njem, izhod pa je omejen na shemo.
 
@@ -191,7 +191,7 @@ Ambiguities in the spec, resolved with the simplest option:
 ## Known limitations and what production would need
 
 - **Data residency:** transcripts contain personal and business data. Production needs an EU-hosted LLM endpoint (e.g. Claude via AWS Bedrock or Google Vertex AI in an EU region) or a signed DPA, plus a retention policy for transcripts in SQLite.
-- **Auth and roles:** login is only simulated (`REVIEWER_EMPLOYEE_ID`). It needs SSO, role-based approval rights, and an override that may require a second person.
+- **Auth and roles:** login is only simulated (`REVIEWER_EMPLOYEE_ID`). It needs SSO and role-based approval rights.
 - **Real queue:** the outbox is processed only by a manually triggered `retry-failed`. It needs a worker with scheduled retries, a dead-letter state, and alerting.
 - **Idempotency keys** use the local meeting id. They should be globally unique (e.g. content hash or UUID) so that a reset local DB cannot collide with keys already stored in the CRM.
 - **Monitoring:** needs metrics on extraction failures, flag rates, sync latency and outbox age, plus tracing of LLM calls and cost tracking.
