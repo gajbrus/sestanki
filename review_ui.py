@@ -24,6 +24,10 @@ BADGE = {
 EMPLOYEES = load_employees()
 EMP_IDS = [None] + [e["id"] for e in EMPLOYEES]
 EMP_LABEL = {None: "— brez —", **{e["id"]: f"{e['full_name']} ({e['id']})" for e in EMPLOYEES}}
+OWNER_ORIGIN = {
+    "explicit": "🗣 Nalogo je prevzel/a na sestanku.",
+    "suggested_by_domain": "💡 Naloga je bila dodeljena na podlagi tipa naloge.",
+}
 
 
 @st.cache_resource
@@ -78,6 +82,18 @@ def add_button(prefix: str, section: str, label: str, editable: bool) -> None:
     if removed and c2.button(f"↩ Obnovi izbrisane ({len(removed)})", key=f"{prefix}restore_{section}"):
         removed.clear()
         st.rerun()
+
+
+def sync_and_report(meeting_id: int, prefix: str, create_client: bool | None = None) -> None:
+    """Push approved data to the system (+ email draft) and show the outcome after rerun."""
+    with st.spinner("Pošiljam v poslovni sistem ..."):
+        status = p.sync(meeting_id, create_client=create_client)
+    if status == db.EMAIL_DRAFTED:
+        st.session_state["flash"] = ("success", prefix + "Podatki so v sistemu, osnutek e-pošte je pripravljen.")
+    else:
+        st.session_state["flash"] = ("error", prefix + "Sinhronizacija ni uspela – podatki so shranjeni, "
+                                     "poskusi znova s 'Ponovi sinhronizacijo'.")
+    st.rerun()
 
 
 # --- sidebar: meeting list -------------------------------------------------------
@@ -223,6 +239,8 @@ with right:
 
     # --- next steps ---
     st.subheader("Naslednji koraki")
+    # Model's original next steps, matched by their verbatim evidence quote
+    original_steps = {ns["evidence"]: ns for ns in (m["extraction_json"] or {}).get("next_steps", [])}
     next_steps = []
     for i, s in enumerate(with_added(k, "next_steps", data.next_steps, editable)):
         if i in deleted(k, "next_steps"):
@@ -238,7 +256,12 @@ with right:
             owner_source = s.owner_source
             if owner != s.owner_employee_id:
                 owner_source = "explicit" if owner else "none"
-            c2.markdown(f"Vir nosilca: `{owner_source}`")
+            # Where the owner came from – shown only while the model's original owner is selected.
+            orig = original_steps.get(s.evidence)
+            if orig and orig["owner_employee_id"] and owner == orig["owner_employee_id"]:
+                label = OWNER_ORIGIN.get(orig["owner_source"])
+                if label:
+                    c2.caption(label)
             due = c3.date_input("Rok", s.due_date, key=f"{k}s{i}due", disabled=not editable,
                                 format="DD.MM.YYYY")
             ev = st.text_input("📎 Dokaz (citat)", s.evidence, key=f"{k}s{i}ev", disabled=not editable)
@@ -303,34 +326,31 @@ with right:
         errors_present = has_errors(flags)
         confirm_client = st.checkbox("Potrjujem ustvarjanje nove stranke, če je ni v sistemu",
                                      key=k + "newclient")
-        blocked_by_errors = errors_present
         if pending and st.button(f"✔ Potrdi vsa opozorila ({len(pending)})", key=k + "confirm_all"):
             confirmed.update(pending)
             st.rerun()
-        if st.button("✅ Odobri", type="primary", disabled=blocked_by_errors or bool(pending)):
+        if st.button("✅ Odobri in sinhroniziraj v sistem", type="primary",
+                     disabled=errors_present or bool(pending)):
             try:
                 p.approve(m["id"], edited, reviewer, confirm_new_client=confirm_client,
                           acknowledged_warnings=acknowledged)
-                st.session_state["flash"] = ("success", "Odobreno.")
-                st.rerun()
             except (ApprovalBlocked, ValidationError) as e:
                 st.error(str(e))
-        if blocked_by_errors:
+            else:
+                sync_and_report(m["id"], "Odobreno. ")
+        if errors_present:
             st.caption("Odobritev je blokirana, dokler obstajajo napake (popravi podatke ali izbriši postavko).")
         elif pending:
             st.caption("Pred odobritvijo potrdi vsa opozorila (✔ Potrdi) ali popravi podatke.")
 
+    # Approved data can no longer change, so the only action left is retrying a failed sync.
     if m["status"] in (db.APPROVED, db.SYNC_FAILED, db.SYNCED):
         create_client = False
         if m["status"] == db.SYNC_FAILED and "ClientNotFound" in (m["last_error"] or ""):
             create_client = st.checkbox(f"Potrjujem ustvarjanje nove stranke '{data.client_company}'",
                                         key=k + "create")
-        if st.button("📤 Sinhroniziraj v sistem", type="primary"):
-            with st.spinner("Pošiljam ..."):
-                status = p.sync(m["id"], create_client=create_client or None)
-            st.session_state["flash"] = ("success" if status == db.EMAIL_DRAFTED else "error",
-                                         f"Rezultat: {status}")
-            st.rerun()
+        if st.button("🔁 Ponovi sinhronizacijo", type="primary"):
+            sync_and_report(m["id"], "", create_client or None)
 
     if m["email_draft"]:
         with st.expander("✉️ Osnutek e-pošte (ni poslan)", expanded=True):

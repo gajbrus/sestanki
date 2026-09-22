@@ -89,8 +89,10 @@ python -m app.pipeline status
 streamlit run review_ui.py
 #    - ambiguous.txt: approximate budget + suggested owner -> yellow warnings
 #    - try editing an evidence quote into something invented -> red error, Approve disabled until fixed or deleted
+#    - "✅ Odobri in sinhroniziraj v sistem" approves and pushes to the system in one step
+#      (if the push fails, the meeting stays approved -> "🔁 Ponovi sinhronizacijo")
 
-# 4. sync an approved meeting (or use the button in the UI)
+# 4. command-line alternative for an approved meeting that is not synced yet
 python -m app.pipeline sync 1
 
 # 5. simulate an outage and sync another approved meeting
