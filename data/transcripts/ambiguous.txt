@@ -1,0 +1,43 @@
+Datum sestanka: 2026-09-17 | Stranka: Termoplast Celje d.o.o.
+
+Nina Potočnik: Pozdravljeni. Hvala za povabilo. Z mano sta danes Tomaž Krajnc iz financ in Ana Kovač, naša strokovnjakinja za podatke.
+Ana Rozman: Pozdravljeni tudi z naše strani. Sem Ana Rozman, vodja kontrolinga pri Termoplastu. Z mano je Gregor Kos, direktor proizvodnje.
+Gregor Kos: Dober dan.
+Nina Potočnik: Dve Ani za eno mizo, bo zanimivo za zapisnik. Gospa Rozman, kaj vas je pripeljalo k nam?
+Ana Rozman: V bistvu imamo občutek, da ne vemo točno, koliko nas stane posamezen izdelek. Imamo okoli dvesto izdelkov iz plastike, od embalaže do tehničnih delov za avtomobilsko industrijo, in lastne cene računamo v Excelu po metodi, ki jo je pred leti postavil moj predhodnik.
+Gregor Kos: Pa še stroji. Imamo dvanajst brizgalnih strojev in podatke o porabi elektrike in izmetu pišemo ročno na papir. Potem jih nekdo enkrat na teden pretipka.
+Ana Kovač: Torej bi radi imeli boljši izračun lastne cene in avtomatski zajem podatkov iz proizvodnje?
+Gregor Kos: Nekaj takega, ja. Mogoče najprej samo zajem s strojev, ne vem. Moram še videti, kaj bo rekla uprava.
+Ana Rozman: Jaz bi rekla, da je izračun lastne cene pomembnejši. Zaradi cen energije smo lani pri nekaterih izdelkih verjetno delali z izgubo, pa tega nismo pravočasno opazili.
+Tomaž Krajnc: To je pogost problem. Ali imate energijo že razporejeno po strojih ali samo skupni števec?
+Gregor Kos: Samo skupni števec za celo halo. Razmišljali smo o števcih na strojih, ampak tega še nismo naročili.
+Ana Kovač: Brez števcev na strojih bo razporejanje energije vedno približek. Mogoče je to nekaj, kar bi bilo treba rešiti najprej.
+Gregor Kos: Mogoče. Bomo videli.
+Nina Potočnik: Kakšen je približen okvir, ki ga imate v mislih za tak projekt?
+Ana Rozman: Hm, težko rečem. Nekje okoli dvajset tisoč, mogoče več, odvisno od tega, kaj predlagate. Uprava še ni potrdila zneska.
+Tomaž Krajnc: Razumem. Torej ni fiksnega proračuna.
+Ana Rozman: Ne še. Mislim, da bomo vedeli več po seji uprave, ki bo nekje konec oktobra.
+Nina Potočnik: In kakšen je časovni okvir? Bi radi začeli letos?
+Gregor Kos: Idealno bi bilo, da bi imeli nekaj že v začetku prihodnjega leta, ampak nimamo trdnega roka.
+Ana Rozman: Mogoče bi bilo smiselno, da prvi del naredimo do poletja. Ampak res ne želim, da to zapišete kot rok.
+Nina Potočnik: V redu, zapišem kot okvirno željo, ne kot rok.
+Ana Kovač: Kakšne sisteme imate danes? Ali imate ERP?
+Ana Rozman: Imamo Pantheon, ki ga uporabljamo za računovodstvo in skladišče. Proizvodnja pa je praktično izven sistema.
+Tomaž Krajnc: Pantheon ima nekaj proizvodnih modulov, a vprašanje je, ali so za vas primerni.
+Gregor Kos: Enkrat smo ga poskusili za proizvodnjo, pa ni šlo. Preveč zapleteno za delavce.
+Ana Kovač: Razumem. Potem bi potrebovali preprostejši vmesnik za zajem na proizvodnih mestih.
+Gregor Kos: Ja, nekaj na tablici ob stroju bi bilo idealno.
+Ana Rozman: Pomembno je tudi, da nas skrbi varstvo podatkov. Nekateri naši kupci iz avtomobilske industrije zahtevajo, da podatki o njihovih izdelkih ne zapustijo EU.
+Nina Potočnik: To je pomembna omejitev. Tudi pogodbe s kupci bi bilo dobro pregledati glede tega.
+Ana Rozman: Ja, nekdo bi moral pogledati te pogodbe, da vemo, kaj sploh smemo.
+Tomaž Krajnc: Se strinjam, to je treba preveriti.
+Nina Potočnik: Glede naslednjih korakov: jaz bom pripravila kratek povzetek današnjega sestanka in predlog delavnice za podrobnejši pregled procesov.
+Ana Rozman: Hvala. Ana, ali lahko pošljete tudi primer, kako drugi računajo lastno ceno?
+Ana Kovač: Seveda, pošljem vam primer modela lastne cene, ki smo ga delali za podobno podjetje, seveda anonimiziran.
+Ana Rozman: Odlično.
+Gregor Kos: Jaz pa bom pri dobavitelju preveril, koliko bi stali števci na strojih.
+Tomaž Krajnc: Če boste to vedeli, lahko to vključimo v oceno stroškov projekta.
+Nina Potočnik: Še odprto vprašanje: ali bi v projekt vključili tudi vzdrževanje strojev ali ne?
+Gregor Kos: To pa res ne vem. Mogoče kasneje.
+Nina Potočnik: V redu, zapišem kot odprto vprašanje. Hvala za danes, se slišimo kmalu.
+Ana Rozman: Hvala vam.

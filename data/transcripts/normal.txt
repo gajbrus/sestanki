@@ -1,0 +1,42 @@
+Datum sestanka: 2026-09-15 | Stranka: Zelena Dolina d.o.o.
+
+Marko Novak: Dobro jutro vsem in hvala, da ste si vzeli čas. Danes bi radi skupaj pregledali, kaj pričakujete od prenove vašega sistema za načrtovanje virov in kako bi se projekta lotili. Z mano sta Luka Horvat, naš ERP arhitekt, in Ana Kovač, ki pokriva podatkovno analitiko.
+Irena Golob: Dobro jutro. Jaz sem finančna direktorica pri Zeleni Dolini, z mano je Boštjan Rupnik, ki vodi logistiko in skladišče.
+Boštjan Rupnik: Dober dan.
+Marko Novak: Irena, morda za začetek na kratko, kje vas najbolj žuli.
+Irena Golob: Trenutno uporabljamo star ERP, ki ga je pred petnajstimi leti razvil lokalni ponudnik. Podpora praktično ne obstaja več. Največji problem je, da nabava, skladišče in računovodstvo delajo vsak v svojem sistemu, podatke pa ročno prepisujemo v Excel. Ob koncu meseca porabimo skoraj teden dni samo za usklajevanje zalog.
+Boštjan Rupnik: Pri nas v skladišču je glavna težava, da ne vidimo zalog v realnem času. Imamo tri skladišča, v Ljubljani, Mariboru in Kopru, in se dogaja, da naročamo blago, ki ga v drugem skladišču že imamo.
+Luka Horvat: Razumem. Torej je ključna zahteva enoten pregled zalog v vseh treh skladiščih v realnem času.
+Boštjan Rupnik: Točno tako, to je za nas absolutna prioriteta številka ena.
+Irena Golob: Druga stvar, ki je zelo pomembna, je avtomatsko knjiženje prejetih računov. Želimo, da se prejeti e-računi samodejno povežejo z naročilnicami in prevzemnicami.
+Luka Horvat: To se da urediti. Ali prejemate e-račune v standardu eSLOG?
+Irena Golob: Večino ja, približno osemdeset odstotkov dobaviteljev pošilja eSLOG 2.0, ostali še vedno pošiljajo PDF.
+Luka Horvat: V redu, za PDF bomo potrebovali dodatno rešitev za zajem, ampak to lahko rešimo v drugi fazi.
+Ana Kovač: Mene zanima še poročanje. Kakšna poročila vodstvo danes dobiva in kaj bi si želeli?
+Irena Golob: Danes dobimo mesečno poročilo o prodaji in marži, ki ga ročno sestavlja ena sodelavka. Želeli bi si nadzorno ploščo z maržo po kupcih in po skupinah izdelkov, ki bi se osveževala vsaj enkrat dnevno. To pa ni tako nujno kot zaloge, lahko pride kasneje.
+Ana Kovač: Razumem, torej nadzorna plošča je srednja prioriteta.
+Irena Golob: Da, tako bi rekla.
+Marko Novak: Pogovorimo se še o okvirju. Kakšen je vaš časovni okvir in proračun?
+Irena Golob: Uprava je projekt odobrila. Proračun je 45.000 EUR za prvo fazo, ki vključuje zaloge in avtomatsko knjiženje računov. Nadzorno ploščo bi financirali ločeno prihodnje leto.
+Marko Novak: Hvala za jasnost. In rok?
+Irena Golob: Prva faza mora biti v produkciji do 31. marca 2027, ker takrat zaključujemo poslovno leto in začnemo z novim inventurnim ciklom.
+Boštjan Rupnik: In prosil bi, da uvedba ne poteka v decembru, ker je to naša najmočnejša sezona in si ne moremo privoščiti zastojev v skladišču.
+Luka Horvat: To je pomembna omejitev, jo bomo upoštevali v načrtu.
+Marko Novak: Imate kakšne preference glede tehnologije?
+Irena Golob: Pogledali smo nekaj ponudnikov in nam je najbolj všeč Microsoft Dynamics 365 Business Central, ker ga že uporablja naša sestrska družba. Nismo pa še zaprti za druge predloge.
+Luka Horvat: Business Central je za vašo velikost smiselna izbira. Pripravil bom primerjavo z dvema alternativama, da boste imeli podlago za odločitev.
+Boštjan Rupnik: Še nekaj. Naši skladiščniki uporabljajo ročne čitalnike črtnih kod znamke Zebra. Bilo bi dobro, da jih ne bi rabili menjati.
+Luka Horvat: Zapisal sem si. Preveril bom združljivost čitalnikov z Business Central.
+Ana Kovač: Za migracijo podatkov bom potrebovala izvoz iz starega sistema. Ali lahko dobimo vzorec podatkov o artiklih in zalogah?
+Boštjan Rupnik: Lahko, naš informatik vam ga lahko pošlje do konca tedna.
+Ana Kovač: Odlično. Jaz bom potem pripravila analizo kakovosti podatkov in ocenila, koliko čiščenja bo potrebno pred migracijo.
+Marko Novak: Naj povzamem naslednje korake. Luka, ti prevzameš primerjavo treh ERP rešitev in preverbo čitalnikov.
+Luka Horvat: Ja, primerjavo pošljem do 25. septembra.
+Marko Novak: Ana, ti prevzameš analizo kakovosti podatkov, ko dobimo izvoz.
+Ana Kovač: Tako je, analizo bom pripravila do 2. oktobra.
+Marko Novak: Jaz pa bom pripravil ponudbo za prvo fazo v okviru proračuna in terminski načrt, ki upošteva, da decembra ne delamo uvedbe. Ponudbo pošljem do 30. septembra.
+Irena Golob: Super. Eno vprašanje imam še odprto, in sicer ali bomo potrebovali dodatne licence za zunanje računovodstvo, ki nam vodi plače. Tega danes ne vem.
+Marko Novak: To je dobro vprašanje, preverili bomo in vam odgovorili skupaj s ponudbo.
+Irena Golob: Hvala. Kar se nas tiče, je bil sestanek zelo koristen.
+Boštjan Rupnik: Tudi z moje strani hvala. Izvoz podatkov pošljemo do petka.
+Marko Novak: Hvala vama, se slišimo v kratkem. Lep dan še naprej.

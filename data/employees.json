@@ -1,0 +1,74 @@
+[
+  {
+    "id": "E001",
+    "full_name": "Marko Novak",
+    "aliases": ["Marko", "Novak"],
+    "email": "marko.novak@svetovanje-plus.si",
+    "phone": "+386 41 111 201",
+    "role": "Partner, vodja projektov",
+    "domains": ["projektni management", "ERP"]
+  },
+  {
+    "id": "E002",
+    "full_name": "Ana Kovač",
+    "aliases": ["Ana", "Kovačeva"],
+    "email": "ana.kovac@svetovanje-plus.si",
+    "phone": "+386 41 111 202",
+    "role": "Višja svetovalka za podatke",
+    "domains": ["podatkovna analitika", "poslovna inteligenca"]
+  },
+  {
+    "id": "E003",
+    "full_name": "Luka Horvat",
+    "aliases": ["Luka"],
+    "email": "luka.horvat@svetovanje-plus.si",
+    "phone": "+386 41 111 203",
+    "role": "ERP arhitekt",
+    "domains": ["ERP", "integracije", "SAP"]
+  },
+  {
+    "id": "E004",
+    "full_name": "Maja Zupančič",
+    "aliases": ["Maja", "Zupančičeva"],
+    "email": "maja.zupancic@svetovanje-plus.si",
+    "phone": "+386 41 111 204",
+    "role": "Pravna svetovalka",
+    "domains": ["pravni vidiki", "GDPR", "pogodbe"]
+  },
+  {
+    "id": "E005",
+    "full_name": "Tomaž Krajnc",
+    "aliases": ["Tomaž", "Tomi"],
+    "email": "tomaz.krajnc@svetovanje-plus.si",
+    "phone": "+386 41 111 205",
+    "role": "Finančni svetovalec",
+    "domains": ["finance", "kontroling", "ponudbe"]
+  },
+  {
+    "id": "E006",
+    "full_name": "Nina Potočnik",
+    "aliases": ["Nina"],
+    "email": "nina.potocnik@svetovanje-plus.si",
+    "phone": "+386 41 111 206",
+    "role": "Projektna vodja",
+    "domains": ["projektni management", "change management"]
+  },
+  {
+    "id": "E007",
+    "full_name": "Jure Mlakar",
+    "aliases": ["Jure"],
+    "email": "jure.mlakar@svetovanje-plus.si",
+    "phone": "+386 41 111 207",
+    "role": "Podatkovni inženir",
+    "domains": ["podatkovna analitika", "integracije", "oblak"]
+  },
+  {
+    "id": "E008",
+    "full_name": "Petra Vidmar",
+    "aliases": ["Petra"],
+    "email": "petra.vidmar@svetovanje-plus.si",
+    "phone": "+386 41 111 208",
+    "role": "Poslovna analitičarka",
+    "domains": ["poslovni procesi", "finance", "ERP"]
+  }
+]

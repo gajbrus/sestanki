@@ -1,0 +1,23 @@
+{
+  "meeting_date": "2026-09-18",
+  "client_company": "Lipa Logistika d.o.o.",
+  "participants": [
+    {"name": "Petra Vidmar", "side": "employee", "employee_id": "E008"},
+    {"name": "Jure Mlakar", "side": "employee", "employee_id": "E007"},
+    {"name": "Maja Zupančič", "side": "employee", "employee_id": "E004"},
+    {"name": "Simon Oblak", "side": "client", "employee_id": null},
+    {"name": "Katja Bizjak", "side": "client", "employee_id": null}
+  ],
+  "summary": "Lipa Logistika d.o.o. želi pregled nad časi dostave po fazah in manj ročnega vnosa naročil.",
+  "client_requirements": [
+    {"description": "Pregled časov dostave po fazah.", "priority": "high", "evidence": "Tako je. To je najpomembnejše."}
+  ],
+  "key_facts": [
+    {"type": "budget", "value": "30.000 EUR", "amount": 30000, "currency": "EUR", "certainty": "stated", "evidence": "Proračun za projekt je 30.000 EUR."}
+  ],
+  "next_steps": [
+    {"description": "Prva analiza časov dostave.", "owner_employee_id": "E007", "owner_source": "explicit", "due_date": null, "evidence": "Ko dobim dostop, bom pripravil prvo analizo časov dostave."}
+  ],
+  "open_questions": [],
+  "uncertainties": []
+}

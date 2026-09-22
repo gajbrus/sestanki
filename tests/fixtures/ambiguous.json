@@ -1,0 +1,28 @@
+{
+  "meeting_date": "2026-09-17",
+  "client_company": "Termoplast Celje d.o.o.",
+  "participants": [
+    {"name": "Nina Potočnik", "side": "employee", "employee_id": "E006"},
+    {"name": "Tomaž Krajnc", "side": "employee", "employee_id": "E005"},
+    {"name": "Ana Kovač", "side": "employee", "employee_id": "E002"},
+    {"name": "Ana Rozman", "side": "client", "employee_id": null},
+    {"name": "Gregor Kos", "side": "client", "employee_id": null}
+  ],
+  "summary": "Termoplast Celje d.o.o. želi natančnejši izračun lastne cene izdelkov in avtomatski zajem podatkov iz proizvodnje. Proračun ni potrjen, stranka ga okvirno ocenjuje na okoli dvajset tisoč evrov. Trdnega roka ni. Podatki kupcev iz avtomobilske industrije ne smejo zapustiti EU.",
+  "client_requirements": [
+    {"description": "Natančnejši izračun lastne cene izdelkov.", "priority": "high", "evidence": "Jaz bi rekla, da je izračun lastne cene pomembnejši."},
+    {"description": "Avtomatski zajem podatkov s strojev (tablica ob stroju).", "priority": "unknown", "evidence": "Ja, nekaj na tablici ob stroju bi bilo idealno."}
+  ],
+  "key_facts": [
+    {"type": "budget", "value": "okoli dvajset tisoč, mogoče več", "amount": 20000, "currency": null, "certainty": "approximate", "evidence": "Nekje okoli dvajset tisoč, mogoče več, odvisno od tega, kaj predlagate."},
+    {"type": "constraint", "value": "Podatki kupcev ne smejo zapustiti EU", "amount": null, "currency": null, "certainty": "stated", "evidence": "zahtevajo, da podatki o njihovih izdelkih ne zapustijo EU"},
+    {"type": "technology", "value": "Pantheon za računovodstvo in skladišče", "amount": null, "currency": null, "certainty": "stated", "evidence": "Imamo Pantheon, ki ga uporabljamo za računovodstvo in skladišče."}
+  ],
+  "next_steps": [
+    {"description": "Povzetek sestanka in predlog delavnice.", "owner_employee_id": "E006", "owner_source": "explicit", "due_date": null, "evidence": "jaz bom pripravila kratek povzetek današnjega sestanka in predlog delavnice"},
+    {"description": "Poslati anonimiziran primer modela lastne cene.", "owner_employee_id": "E002", "owner_source": "explicit", "due_date": null, "evidence": "pošljem vam primer modela lastne cene"},
+    {"description": "Pregled pogodb s kupci glede prenosa podatkov izven EU.", "owner_employee_id": "E004", "owner_source": "suggested_by_domain", "due_date": null, "evidence": "nekdo bi moral pogledati te pogodbe, da vemo, kaj sploh smemo."}
+  ],
+  "open_questions": ["Ali bo projekt vključeval tudi vzdrževanje strojev?"],
+  "uncertainties": ["Proračun ni potrjen; uprava bo odločala konec oktobra.", "Ni jasno, ali je prioriteta lastna cena ali zajem s strojev."]
+}
