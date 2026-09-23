@@ -1,0 +1,30 @@
+{
+  "meeting_date": "2026-09-15",
+  "client_company": "Zelena Dolina d.o.o.",
+  "participants": [
+    {"name": "Marko Novak", "side": "employee", "employee_id": "E001"},
+    {"name": "Luka Horvat", "side": "employee", "employee_id": "E003"},
+    {"name": "Ana Kovač", "side": "employee", "employee_id": "E002"},
+    {"name": "Irena Golob", "side": "client", "employee_id": null},
+    {"name": "Boštjan Rupnik", "side": "client", "employee_id": null}
+  ],
+  "summary": "Zelena Dolina d.o.o. želi zamenjati zastareli ERP sistem. Ključna zahteva je enoten pregled zalog v treh skladiščih v realnem času, sledi avtomatsko knjiženje prejetih e-računov. Proračun za prvo fazo je 45.000 EUR, rok za produkcijo je 31. marec 2027. Stranka se nagiba k Microsoft Dynamics 365 Business Central, uvedba decembra ni mogoča.",
+  "client_requirements": [
+    {"description": "Enoten pregled zalog v vseh treh skladiščih v realnem času.", "priority": "high", "evidence": "Točno tako, to je za nas absolutna prioriteta številka ena."},
+    {"description": "Avtomatsko knjiženje prejetih e-računov in povezava z naročilnicami in prevzemnicami.", "priority": "high", "evidence": "Želimo, da se prejeti e-računi samodejno povežejo z naročilnicami in prevzemnicami."},
+    {"description": "Nadzorna plošča z maržo po kupcih in skupinah izdelkov, dnevno osveževanje.", "priority": "medium", "evidence": "Želeli bi si nadzorno ploščo z maržo po kupcih in po skupinah izdelkov, ki bi se osveževala vsaj enkrat dnevno."}
+  ],
+  "key_facts": [
+    {"type": "budget", "value": "45.000 EUR za prvo fazo", "amount": 45000, "currency": "EUR", "certainty": "stated", "evidence": "Proračun je 45.000 EUR za prvo fazo"},
+    {"type": "deadline", "value": "Prva faza v produkciji do 31. marca 2027", "amount": null, "currency": null, "certainty": "stated", "evidence": "Prva faza mora biti v produkciji do 31. marca 2027"},
+    {"type": "constraint", "value": "Uvedba ne sme potekati decembra", "amount": null, "currency": null, "certainty": "stated", "evidence": "prosil bi, da uvedba ne poteka v decembru"},
+    {"type": "technology", "value": "Preferenca: Microsoft Dynamics 365 Business Central", "amount": null, "currency": null, "certainty": "stated", "evidence": "nam je najbolj všeč Microsoft Dynamics 365 Business Central"}
+  ],
+  "next_steps": [
+    {"description": "Primerjava treh ERP rešitev in preverba združljivosti čitalnikov Zebra.", "owner_employee_id": "E003", "owner_source": "explicit", "due_date": "2026-09-25", "evidence": "Ja, primerjavo pošljem do 25. septembra."},
+    {"description": "Analiza kakovosti podatkov po prejemu izvoza.", "owner_employee_id": "E002", "owner_source": "explicit", "due_date": "2026-10-02", "evidence": "Tako je, analizo bom pripravila do 2. oktobra."},
+    {"description": "Ponudba za prvo fazo in terminski načrt brez decembrske uvedbe.", "owner_employee_id": "E001", "owner_source": "explicit", "due_date": "2026-09-30", "evidence": "Ponudbo pošljem do 30. septembra."}
+  ],
+  "open_questions": ["Ali bodo potrebne dodatne licence za zunanje računovodstvo, ki vodi plače?"],
+  "uncertainties": []
+}

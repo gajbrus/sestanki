@@ -1,0 +1,29 @@
+{
+  "meeting_date": "2026-09-18",
+  "client_company": "Lipa Logistika d.o.o.",
+  "participants": [
+    {"name": "Petra Vidmar", "side": "employee", "employee_id": "E008"},
+    {"name": "Jure Mlakar", "side": "employee", "employee_id": "E007"},
+    {"name": "Maja Zupančič", "side": "employee", "employee_id": "E004"},
+    {"name": "Simon Oblak", "side": "client", "employee_id": null},
+    {"name": "Katja Bizjak", "side": "client", "employee_id": null}
+  ],
+  "summary": "Lipa Logistika d.o.o. je logistično podjetje s 40 vozili, ki želi pregled nad časi dostave po posameznih fazah. Naročila kupcev danes ročno vnašajo iz treh različnih virov. Pred analizo podatkov s sledilnikov je treba preveriti pravno podlago glede osebnih podatkov voznikov. Prve rezultate želijo do sredine novembra. Proračun ni bil omenjen.",
+  "client_requirements": [
+    {"description": "Pregled nad časi dostave po posameznih fazah.", "priority": "high", "evidence": "Tako je. To je najpomembnejše."},
+    {"description": "Poenoten zajem naročil iz e-pošte, Excela in portalov.", "priority": "unknown", "evidence": "Vse to ročno vnašamo v naš transportni sistem."},
+    {"description": "Sledenje pošiljk v realnem času za glavnega kupca.", "priority": "medium", "evidence": "Naš glavni kupec je napovedal, da bo od prihodnjega leta zahteval sledenje pošiljk v realnem času."}
+  ],
+  "key_facts": [
+    {"type": "deadline", "value": "Prvi rezultati do sredine novembra", "amount": null, "currency": null, "certainty": "approximate", "evidence": "Recimo do sredine novembra."},
+    {"type": "technology", "value": "Lastni transportni sistem na Microsoft SQL Server", "amount": null, "currency": null, "certainty": "stated", "evidence": "Baza je Microsoft SQL Server."},
+    {"type": "constraint", "value": "Uprava je zadržana glede oblaka", "amount": null, "currency": null, "certainty": "stated", "evidence": "Naša uprava je glede oblaka precej zadržana."}
+  ],
+  "next_steps": [
+    {"description": "Pregled pogodb z vozniki in pravilnika o sledenju.", "owner_employee_id": "E004", "owner_source": "explicit", "due_date": null, "evidence": "Pregledala bom vaše obstoječe pogodbe z vozniki in pravilnik o sledenju"},
+    {"description": "Prva analiza časov dostave po prejemu dostopa do API-ja.", "owner_employee_id": "E007", "owner_source": "explicit", "due_date": null, "evidence": "Ko dobim dostop, bom pripravil prvo analizo časov dostave."},
+    {"description": "Popis procesa sprejema naročil z dispečerji.", "owner_employee_id": "E008", "owner_source": "explicit", "due_date": "2026-09-23", "evidence": "Jaz pa bom pripravila popis procesa sprejema naročil"}
+  ],
+  "open_questions": ["Ali bo rešitev tekla lokalno ali v oblaku?"],
+  "uncertainties": []
+}

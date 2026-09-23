@@ -1,0 +1,41 @@
+Datum sestanka: 2026-09-18 | Stranka: Lipa Logistika d.o.o.
+
+Petra Vidmar: Dober dan in dobrodošli. Z mano je danes Jure Mlakar, naš podatkovni inženir, in Maja Zupančič, ki pokriva pravne vidike. Danes nas zanima predvsem, kako trenutno potekajo vaši procesi.
+Simon Oblak: Dober dan. Sem Simon Oblak, direktor operative pri Lipa Logistiki. Z mano je Katja Bizjak, ki je odgovorna za informatiko.
+Katja Bizjak: Pozdravljeni.
+Petra Vidmar: Gospod Oblak, za začetek, s čim se vaše podjetje ukvarja in kaj bi radi izboljšali?
+Simon Oblak: Smo logistično podjetje s štiridesetimi tovornimi vozili. Vozimo predvsem za trgovske verige po Sloveniji in Hrvaški. Največji izziv je načrtovanje poti. Dispečerji to danes delajo ročno, na podlagi izkušenj, in vsako jutro porabijo dve uri, da sestavijo razpored.
+Jure Mlakar: Ali imate vozila opremljena z GPS sledilniki?
+Katja Bizjak: Da, vsa vozila imajo sledilnike ponudnika, ki nam podatke daje prek spletnega portala. Imajo tudi API, ampak ga še nismo uporabljali.
+Jure Mlakar: To je dobra osnova. Podatke s sledilnikov bi lahko povezali z naročili in naredili analizo dejanskih časov dostave.
+Simon Oblak: To bi nam zelo pomagalo. Kupci se pogosto pritožujejo zaradi zamud, mi pa nimamo podatkov, da bi videli, kje nastane zamuda, ali pri nakladanju, na cesti ali pri razkladanju.
+Petra Vidmar: Torej je prva zahteva pregled nad časi dostave po posameznih fazah.
+Simon Oblak: Tako je. To je najpomembnejše.
+Katja Bizjak: Druga stvar je, da imamo naročila kupcev v treh različnih oblikah. Nekateri pošiljajo e-pošto, nekateri Excel, dve verigi pa imata svoj portal. Vse to ročno vnašamo v naš transportni sistem.
+Jure Mlakar: Kateri transportni sistem uporabljate?
+Katja Bizjak: Imamo lastno rešitev, ki jo je razvil zunanji izvajalec. Baza je Microsoft SQL Server.
+Jure Mlakar: V redu, to pomeni, da bomo lahko dostopali do podatkov neposredno, če dobimo dovoljenje.
+Maja Zupančič: Glede tega bi opozorila na nekaj. Podatki s sledilnikov so lahko osebni podatki, saj posredno kažejo lokacijo voznikov. Preden jih začnemo analizirati, moramo preveriti pravno podlago in ali imate z vozniki ustrezno urejeno obveščanje.
+Simon Oblak: Tega pa nisem vedel. Mislim, da imamo v pogodbah nekaj o sledenju vozil, ne vem pa, če je dovolj.
+Maja Zupančič: Pregledala bom vaše obstoječe pogodbe z vozniki in pravilnik o sledenju, če mi jih lahko posredujete.
+Katja Bizjak: Lahko, pošljem vam jih.
+Petra Vidmar: Kakšen je vaš časovni okvir?
+Simon Oblak: Želeli bi, da bi prve rezultate analize imeli pred novoletno sezono, ker je takrat največ prevozov. Recimo do sredine novembra.
+Petra Vidmar: Razumem, torej prvi rezultati do sredine novembra.
+Simon Oblak: Tako.
+Jure Mlakar: Potreboval bom testni dostop do API-ja ponudnika sledilnikov in izvoz naročil za zadnje tri mesece.
+Katja Bizjak: API ključ vam lahko uredim ta teden. Izvoz naročil pa potrebujem malo več časa, ker ga moram dobiti od zunanjega izvajalca.
+Jure Mlakar: V redu. Ko dobim dostop, bom pripravil prvo analizo časov dostave.
+Petra Vidmar: Jaz pa bom pripravila popis procesa sprejema naročil, da vidimo, kje je največ ročnega dela. Za to bi potrebovala en dan z vašimi dispečerji.
+Simon Oblak: To lahko uredimo. Kdaj vam ustreza?
+Petra Vidmar: Predlagam naslednji teden, v sredo, 23. septembra.
+Simon Oblak: V redu, bom obvestil dispečerje.
+Katja Bizjak: Imam še vprašanje. Ali bi rešitev za načrtovanje poti tekla pri nas ali v oblaku? Naša uprava je glede oblaka precej zadržana.
+Jure Mlakar: Oboje je mogoče. To bi se odločili, ko bomo videli obseg podatkov.
+Katja Bizjak: Dobro, potem to ostane odprto.
+Simon Oblak: Še nekaj. Naš glavni kupec je napovedal, da bo od prihodnjega leta zahteval sledenje pošiljk v realnem času. Tega zdaj ne moremo ponuditi.
+Petra Vidmar: To si zapišem kot pomembno zahtevo za naprej.
+Maja Zupančič: Pri tem bo spet treba paziti na deljenje lokacijskih podatkov s tretjimi osebami.
+Simon Oblak: Razumem. Hvala za opozorilo.
+Petra Vidmar: Hvala vam za čas. Naslednji teden se vidimo pri dispečerjih.
+Simon Oblak: Hvala, nasvidenje.
